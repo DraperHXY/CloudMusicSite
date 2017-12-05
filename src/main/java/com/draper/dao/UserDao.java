@@ -14,4 +14,6 @@ public interface UserDao extends Dao {
 
     boolean checkUser(User user);
 
+    boolean refreshLastLoginTime(User user);
+
 }

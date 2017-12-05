@@ -24,12 +24,8 @@ crashlytics-build.properties
 fabric.properties
 
 .idea/
-src/main/resources/dp.properties
-src/main/webapp/Where is the love.mp3
-src/main/webapp/css/
-src/main/webapp/fonts/
-src/main/webapp/index.jsp
-src/main/webapp/js/
+src/main/resources/db.properties
+src/main/webapp/music/Where is the love.mp3
 src/main/webapp/jsp/
 src/main/webapp/temp.html
 src/main/webapp/test.html

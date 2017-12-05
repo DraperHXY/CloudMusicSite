@@ -3,6 +3,8 @@ package com.draper;
 import com.draper.util.DbUtil;
 
 import java.sql.Connection;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by Draper_HXY 2017/11/27 下午7:35
@@ -11,8 +13,9 @@ import java.sql.Connection;
 public class Test {
 
     public static void main(String[] args) {
-        Connection connection = DbUtil.getConnection();
-        System.out.println(connection);
+        System.out.println(new java.sql.Date(new Date().getTime()));
+
+
     }
 
 

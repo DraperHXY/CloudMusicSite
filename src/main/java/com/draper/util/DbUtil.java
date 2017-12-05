@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Properties;
 
 /**
@@ -39,6 +41,13 @@ public class DbUtil {
             e.printStackTrace();
         }
         return connection;
+    }
+
+    public static String getCurrentTime(){
+        Date date = new Date();
+        SimpleDateFormat sdformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//24小时制
+        String LgTime = sdformat.format(date);
+        return LgTime;
     }
 
 }

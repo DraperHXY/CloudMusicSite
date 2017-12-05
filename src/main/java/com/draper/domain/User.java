@@ -1,5 +1,7 @@
 package com.draper.domain;
 
+import java.util.Date;
+
 /**
  * Created by Draper_HXY 2017/11/27 下午8:08
  * Email: Draper_HXY@163.com
@@ -9,6 +11,11 @@ public class User {
     private String account;
     private String password;
     private int credit;
+    private Date lastLoginTime;
+
+    public User(String account){
+        this.account = account;
+    }
 
     public String getName() {
         return name;
@@ -20,10 +27,6 @@ public class User {
 
     public String getAccount() {
         return account;
-    }
-
-    public void setAccount(String account) {
-        this.account = account;
     }
 
     public String getPassword() {
@@ -40,5 +43,13 @@ public class User {
 
     public void setCredit(int credit) {
         this.credit = credit;
+    }
+
+    public Date getLastLoginTime() {
+        return lastLoginTime;
+    }
+
+    public void setLastLoginTime(Date lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
     }
 }

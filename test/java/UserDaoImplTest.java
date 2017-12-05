@@ -15,9 +15,8 @@ public class UserDaoImplTest {
     public void testAdd100() {
         UserDao userDao = new UserDaoImpl();
         for (int i = 0; i < 100; i++) {
-            User user = new User();
+            User user = new User(String.valueOf(i));
             user.setName("第" + i + "个 Draper");
-            user.setAccount(String.valueOf(i));
             user.setPassword(String.valueOf(i));
             user.setCredit(i);
             userDao.add(user);
@@ -28,14 +27,12 @@ public class UserDaoImplTest {
     public void testAddRepeat() {
         try {
             UserDao userDao = new UserDaoImpl();
-            User user1 = new User();
+            User user1 = new User("Draper");
             user1.setName("Draper");
-            user1.setAccount("Draper");
             user1.setPassword("Draper");
             userDao.add(user1);
-            User user2 = new User();
+            User user2 = new User("Draper");
             user2.setName("Draper");
-            user2.setAccount("Draper");
             user2.setPassword("Draper");
             userDao.add(user2);
         } catch (Exception e) {
@@ -56,8 +53,7 @@ public class UserDaoImplTest {
     @Test
     public void testCheck() {
         UserDao userDao = new UserDaoImpl();
-        User user = new User();
-        user.setAccount("Draper");
+        User user = new User("Draper");
         user.setPassword("Draper");
         Assert.assertEquals(true, userDao.checkUser(user));
     }
@@ -65,8 +61,7 @@ public class UserDaoImplTest {
     @Test
     public void testIncreaseCredit(){
         UserDao userDao = new UserDaoImpl();
-        User user = new User();
-        user.setAccount("Draper");
+        User user = new User("Draper");
         user.setPassword("Draper");
         userDao.increaseCredit(10,user);
     }
@@ -74,10 +69,16 @@ public class UserDaoImplTest {
     @Test
     public void testDecreaseCredit(){
         UserDao userDao = new UserDaoImpl();
-        User user = new User();
-        user.setAccount("Draper");
+        User user = new User("Draper");
         user.setPassword("Draper");
         userDao.decreaseCredit(20, user);
+    }
+
+    @Test
+    public void testRefreshLastLoginTime(){
+        UserDao userDao = new UserDaoImpl();
+        User user = new User("Draper");
+        userDao.refreshLastLoginTime(user);
     }
 
 }

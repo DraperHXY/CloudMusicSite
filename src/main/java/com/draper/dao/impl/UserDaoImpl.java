@@ -3,9 +3,9 @@ package com.draper.dao.impl;
 import com.draper.dao.UserDao;
 import com.draper.domain.User;
 import com.draper.util.DbUtil;
-import com.draper.util.Log;
 
 import java.sql.*;
+
 
 /**
  * Created by Draper_HXY 2017/11/27 下午8:10
@@ -46,50 +46,36 @@ public class UserDaoImpl implements UserDao {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM user WHERE account = '" + strKey + "'");
             if (rs.next()) {
-                user = new User();
                 String name = rs.getString(1);
                 String account = rs.getString(2);
                 String password = rs.getString(3);
+                user = new User(account);
                 int credit = rs.getInt(4);
                 user.setName(name);
-                user.setAccount(account);
                 user.setPassword(password);
                 user.setCredit(credit);
             }
+            rs.close();
+            stmt.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return user;
     }
 
     public boolean increaseCredit(int credit, User user) {
-        if (checkUser(user)) {
-            User usr = (User) find(user.getAccount());
-            int lastCredit = usr.getCredit() + credit;
-            String sql = "update user set credit='" + lastCredit + "' where account='" + usr.getAccount() + "'";
-            try {
-                PreparedStatement ptmt = connection.prepareStatement(sql);
-                ptmt.executeUpdate();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return false;
+        int lastCredit = user.getCredit() + credit;
+        String sql = "update user set credit='" + lastCredit + "' where account='" + user.getAccount() + "'";
+        executedUpdate(sql);
+        return true;
     }
 
     public boolean decreaseCredit(int credit, User user) {
-        if (checkUser(user)) {
-            User usr = (User) find(user.getAccount());
-            int lastCredit = usr.getCredit() - credit;
-            String sql = "update user set credit='" + lastCredit + "' where account='" + usr.getAccount() + "'";
-            try {
-                PreparedStatement ptmt = connection.prepareStatement(sql);
-                ptmt.executeUpdate();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return false;
+        int lastCredit = user.getCredit() - credit;
+        String sql = "update user set credit='" + lastCredit + "' where account='" + user.getAccount() + "'";
+        executedUpdate(sql);
+        return true;
     }
 
     public boolean checkUser(User user) {
@@ -101,5 +87,22 @@ public class UserDaoImpl implements UserDao {
             return true;
         }
         return false;
+    }
+
+    public boolean refreshLastLoginTime(User user) {
+        String sql = "update user set last_login_time='" + DbUtil.getCurrentTime() + "' where account='" + user.getAccount() + "'";
+        executedUpdate(sql);
+        return true;
+    }
+
+    private void executedUpdate(String sql){
+        PreparedStatement ptmt = null;
+        try {
+            ptmt = connection.prepareStatement(sql);
+            ptmt.executeUpdate();
+            ptmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
