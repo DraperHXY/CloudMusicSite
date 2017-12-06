@@ -66,36 +66,42 @@ public class UserDaoImpl implements UserDao {
 
     public boolean increaseCredit(int credit, User user) {
         int lastCredit = user.getCredit() + credit;
-        String sql = "update user set credit='" + lastCredit + "' where account='" + user.getAccount() + "'";
+        String sql = "UPDATE user SET credit='" + lastCredit + "' WHERE account='" + user.getAccount() + "'";
         executedUpdate(sql);
         return true;
     }
 
     public boolean decreaseCredit(int credit, User user) {
         int lastCredit = user.getCredit() - credit;
-        String sql = "update user set credit='" + lastCredit + "' where account='" + user.getAccount() + "'";
+        String sql = "UPDATE user SET credit='" + lastCredit + "' WHERE account='" + user.getAccount() + "'";
         executedUpdate(sql);
         return true;
     }
 
+    /**
+     * 检查用户账号密码是否匹配
+     *
+     * @param user
+     * @return
+     */
     public boolean checkUser(User user) {
         String realAccount = user.getAccount();
         String realPassword = user.getPassword();
         User usr = (User) find(realAccount);
         String expectPassword = usr.getPassword();
-        if(realPassword.equals(expectPassword)){
+        if (realPassword.equals(expectPassword)) {
             return true;
         }
         return false;
     }
 
     public boolean refreshLastLoginTime(User user) {
-        String sql = "update user set last_login_time='" + DbUtil.getCurrentTime() + "' where account='" + user.getAccount() + "'";
+        String sql = "UPDATE user SET last_login_time='" + DbUtil.getCurrentTime() + "' WHERE account='" + user.getAccount() + "'";
         executedUpdate(sql);
         return true;
     }
 
-    private void executedUpdate(String sql){
+    private void executedUpdate(String sql) {
         PreparedStatement ptmt = null;
         try {
             ptmt = connection.prepareStatement(sql);

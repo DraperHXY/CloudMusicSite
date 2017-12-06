@@ -6,7 +6,7 @@
     <title>注册CloudMusicSite</title>
     <link rel="stylesheet" href="css/bootstrap.min.css"/>
     <style>
-        .thin{
+        .thin {
             width: 400px;
         }
     </style>
@@ -18,7 +18,8 @@
     <div class="container">
         <div class="navbar-header">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                        aria-expanded="false" aria-controls="navbar">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -31,50 +32,56 @@
 
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="#">首页</a></li>
-                <li><a href="#">资讯</a></li>
-                <li><a href="#">产品</a></li>
-                <li><a href="#">关于</a></li>
+                <li><a href="/CloudMusicSite/">Home</a></li>
+                <li><a href="#">News</a></li>
+                <li><a href="#">Product</a></li>
+                <li><a href="#">About</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <!--右边的 navbar-->
-                <li><a href="#">登录</a></li>
+                <li><a href="#">Sign in</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
                 <!--右边的 navbar-->
-                <li><a href="#">注册</a></li>
+                <li><a href="#">Sign up</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
 </nav>
 
 
-<div class="container thin">
+<div class="container">
     <div class="jumbotron">
-        <p class="h1 text-center">登录</p>
-        <form class="form">
-            <div class="form-group">
-                <label class="sr-only" for="exampleInputEmail3">邮箱地址</label>
-                <input type="email" class="form-control" id="exampleInputEmail3" placeholder="邮箱地址">
-            </div>
-            <div class="form-group">
-                <label class="sr-only" for="exampleInputPassword3">密码</label>
-                <input type="password" class="form-control" id="exampleInputPassword3" placeholder="密码">
-            </div>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-xs-3 col-xs-offset-2">
-                        <button type="button" onclick="javascript:history.go(-1);" class="btn btn-default btn-danger">取消</button>
-                    </div>
+        <p class="h1 text-center">Join CloudMusicSite</p>
 
-                    <div class="col-xs-3 col-xs-offset-2">
-                        <button type="submit" class="btn btn-default btn-success">注册</button>
+        <div class="row">
+            <div class="col-md-12">
+                <form class="form" action="SignUp.do" method="post">
+                    <div class="form-group">
+                        <label class="sr-only" for="inputName">Name</label>
+                        <input type="text" class="form-control" id="inputName" name="inputName" placeholder="Name">
                     </div>
-                </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="inputEmailAddress">Email address</label>
+                        <input type="email" class="form-control" id="inputEmailAddress" name="inputEmailAddress" placeholder="Email address">
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="inputPassword">Password</label>
+                        <input type="password" class="form-control" id="inputPassword" name="inputPassword" placeholder="Password">
+                    </div>
+                    <small class="text-danger">请不要输入真实的密码,会被后台看见的哦  ( ´･∀･｀)</small>
+                    <br>
+                    <small class="text-danger">Please do not enter the actual password, which will be seen by the background programmer  ( ´･∀･｀)</small>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-lg btn-success center-block">Create an account</button>
+                    </div>
+                </form>
             </div>
-        </form>
+        </div>
     </div>
+
 </div>
 
 <script src="js/jquery-1-12-4.min.js"></script>

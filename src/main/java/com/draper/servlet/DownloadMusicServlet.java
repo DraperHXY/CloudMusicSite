@@ -1,4 +1,4 @@
-package com.draper.view.servlet;
+package com.draper.servlet;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
