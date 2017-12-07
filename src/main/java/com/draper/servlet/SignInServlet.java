@@ -1,20 +1,21 @@
 package com.draper.servlet;
 
 import com.draper.controller.UserServiceManager;
+import com.draper.controller.UserTrackManager;
 import com.draper.domain.User;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
- * Created by Draper_HXY 2017/12/6 下午9:50
+ * Created by Draper_HXY 2017/12/7 下午2:08
  * Email: Draper_HXY@163.com
  */
-public class SignUpServlet extends HttpServlet {
+public class SignInServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -23,18 +24,19 @@ public class SignUpServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String name = req.getParameter("inputName");
         String emailAdress = req.getParameter("inputEmailAddress");
         String password = req.getParameter("inputPassword");
         User user = new User(emailAdress);
-        user.setName(name);
         user.setPassword(password);
+        user = UserServiceManager.signIn(user);
 
-        if (UserServiceManager.signUp(user)) {
-            RequestDispatcher view = req.getRequestDispatcher("SignIn.do");
-            view.forward(req, resp);
+        if (user != null) {
+            HttpSession session = req.getSession();
+            System.out.println(session.getCreationTime());
+            UserTrackManager.signIn(session, user);
+            resp.sendRedirect("index.html");
         } else {
-            System.out.println("注册失败");
+            resp.sendRedirect("404.html");
         }
     }
 }

@@ -4,6 +4,10 @@ import com.draper.domain.User;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by Draper_HXY 2017/11/27 下午8:33
  * Email: Draper_HXY@163.com
@@ -59,15 +63,15 @@ public class UserDaoImplTest {
     }
 
     @Test
-    public void testIncreaseCredit(){
+    public void testIncreaseCredit() {
         UserDao userDao = new UserDaoImpl();
         User user = new User("Draper");
         user.setPassword("Draper");
-        userDao.increaseCredit(10,user);
+        userDao.increaseCredit(10, user);
     }
 
     @Test
-    public void testDecreaseCredit(){
+    public void testDecreaseCredit() {
         UserDao userDao = new UserDaoImpl();
         User user = new User("Draper");
         user.setPassword("Draper");
@@ -75,10 +79,23 @@ public class UserDaoImplTest {
     }
 
     @Test
-    public void testRefreshLastLoginTime(){
+    public void testRefreshLastLoginTime() {
         UserDao userDao = new UserDaoImpl();
         User user = new User("Draper");
         userDao.refreshLastLoginTime(user);
+    }
+
+    @Test
+    public void testGetLastLoginTime() {
+        UserDao userDao = new UserDaoImpl();
+        User user = new User("Draper_HXY@163.com");
+        Date date = userDao.getLastLoginTime(user);
+        System.out.println(date.toString());
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
+        String now = df.format(new Date());
+        System.out.println(now);
+        boolean isEqual = date.toString().equals(now);
+        Assert.assertEquals(true, isEqual);
     }
 
 }

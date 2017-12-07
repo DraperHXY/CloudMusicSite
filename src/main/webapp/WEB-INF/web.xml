@@ -1,32 +1,97 @@
 <!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
+        "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+        "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-  <display-name>Archetype Created Web Application</display-name>
+    <display-name>Archetype Created Web Application</display-name>
 
-  <servlet>
-    <servlet-name>DownloadMusic</servlet-name>
-    <servlet-class>com.draper.servlet.DownloadMusicServlet</servlet-class>
-  </servlet>
+    <servlet>
+        <servlet-name>IndexPage</servlet-name>
+        <jsp-file>/index.jsp</jsp-file>
+    </servlet>
 
-  <servlet>
-    <servlet-name>SignUpServlet</servlet-name>
-    <servlet-class>com.draper.servlet.SignUpServlet</servlet-class>
-  </servlet>
+    <servlet>
+        <servlet-name>AboutPage</servlet-name>
+        <jsp-file>/about.jsp</jsp-file>
+    </servlet>
 
-  <servlet-mapping>
-    <servlet-name>DownloadMusic</servlet-name>
-    <url-pattern>/DreamingAlone.mp3</url-pattern>
-  </servlet-mapping>
+    <servlet>
+        <servlet-name>SignUpPage</servlet-name>
+        <jsp-file>/SignUp.jsp</jsp-file>
+    </servlet>
 
-  <servlet-mapping>
-    <servlet-name>SignUpServlet</servlet-name>
-    <url-pattern>/SignUp.do</url-pattern>
-  </servlet-mapping>
+    <servlet>
+        <servlet-name>SignInPage</servlet-name>
+        <jsp-file>/signIn.jsp</jsp-file>
+    </servlet>
 
-  <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-  </welcome-file-list>
+    <servlet>
+        <servlet-name>DownloadMusic</servlet-name>
+        <servlet-class>com.draper.servlet.DownloadMusicServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>SignUpServlet</servlet-name>
+        <servlet-class>com.draper.servlet.SignUpServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>SignInServlet</servlet-name>
+        <servlet-class>com.draper.servlet.SignInServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>SignOutServlet</servlet-name>
+        <servlet-class>com.draper.servlet.SignOutServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>IndexPage</servlet-name>
+        <url-pattern>/index.html</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>AboutPage</servlet-name>
+        <url-pattern>/about.html</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>SignUpPage</servlet-name>
+        <url-pattern>/SignUp.html</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>SignInPage</servlet-name>
+        <url-pattern>/signIn.html</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>DownloadMusic</servlet-name>
+        <url-pattern>/DreamingAlone.mp3</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>SignUpServlet</servlet-name>
+        <url-pattern>/SignUp.do</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>SignInServlet</servlet-name>
+        <url-pattern>/SignIn.do</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>SignOutServlet</servlet-name>
+        <url-pattern>/SignOut.do</url-pattern>
+    </servlet-mapping>
+
+    <session-config>
+        <session-timeout>5</session-timeout>
+    </session-config>
+
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
 
 </web-app>

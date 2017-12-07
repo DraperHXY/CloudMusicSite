@@ -49,11 +49,13 @@ public class UserDaoImpl implements UserDao {
                 String name = rs.getString(1);
                 String account = rs.getString(2);
                 String password = rs.getString(3);
-                user = new User(account);
                 int credit = rs.getInt(4);
+                Date date = rs.getDate(5);
+                user = new User(account);
                 user.setName(name);
                 user.setPassword(password);
                 user.setCredit(credit);
+                user.setLastLoginTime(date);
             }
             rs.close();
             stmt.close();
@@ -88,6 +90,9 @@ public class UserDaoImpl implements UserDao {
         String realAccount = user.getAccount();
         String realPassword = user.getPassword();
         User usr = (User) find(realAccount);
+        if(usr == null){
+            return false;
+        }
         String expectPassword = usr.getPassword();
         if (realPassword.equals(expectPassword)) {
             return true;
@@ -95,8 +100,28 @@ public class UserDaoImpl implements UserDao {
         return false;
     }
 
+    public Date getLastLoginTime(User user) {
+        Date date = null;
+        String sql = "SELECT last_login_time FROM user WHERE account='" + user.getAccount() +"'";
+        connection = DbUtil.getConnection();
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            if (rs.next()) {
+                date = rs.getDate(1);
+                user.setLastLoginTime(date);
+            }
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return date;
+    }
+
     public boolean refreshLastLoginTime(User user) {
         String sql = "UPDATE user SET last_login_time='" + DbUtil.getCurrentTime() + "' WHERE account='" + user.getAccount() + "'";
+        System.out.println(DbUtil.getCurrentTime());
         executedUpdate(sql);
         return true;
     }

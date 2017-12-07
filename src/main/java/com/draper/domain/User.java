@@ -12,6 +12,7 @@ public class User {
     private String password;
     private int credit;
     private Date lastLoginTime;
+    private boolean isOnline;
 
     public User(String account){
         this.account = account;
@@ -51,5 +52,13 @@ public class User {
 
     public void setLastLoginTime(Date lastLoginTime) {
         this.lastLoginTime = lastLoginTime;
+    }
+
+    public boolean isOnline() {
+        return isOnline;
+    }
+
+    public void setOnline(boolean online) {
+        isOnline = online;
     }
 }
