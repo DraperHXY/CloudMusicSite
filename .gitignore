@@ -26,7 +26,7 @@ fabric.properties
 .idea/
 src/main/resources/db.properties
 src/main/webapp/music/Where is the love.mp3
-src/main/webapp/jsp/
 src/main/webapp/temp.html
 src/main/webapp/test.html
 target/
+src/main/java/com/draper/view/

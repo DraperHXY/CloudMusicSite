@@ -65,17 +65,17 @@ public class UserDaoImplTest {
     @Test
     public void testIncreaseCredit() {
         UserDao userDao = new UserDaoImpl();
-        User user = new User("Draper");
-        user.setPassword("Draper");
+        User user = new User("Admin@adm.com");
+        user.setPassword("Admin");
         userDao.increaseCredit(10, user);
     }
 
     @Test
     public void testDecreaseCredit() {
         UserDao userDao = new UserDaoImpl();
-        User user = new User("Draper");
-        user.setPassword("Draper");
-        userDao.decreaseCredit(20, user);
+        User user = new User("Admin@adm.com");
+        user.setPassword("Admin");
+        userDao.decreaseCredit(5, user);
     }
 
     @Test

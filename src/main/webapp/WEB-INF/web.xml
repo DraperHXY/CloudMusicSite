@@ -7,22 +7,22 @@
 
     <servlet>
         <servlet-name>IndexPage</servlet-name>
-        <jsp-file>/index.jsp</jsp-file>
+        <jsp-file>/jsp/index.jsp</jsp-file>
     </servlet>
 
     <servlet>
         <servlet-name>AboutPage</servlet-name>
-        <jsp-file>/about.jsp</jsp-file>
+        <jsp-file>/jsp/about.jsp</jsp-file>
     </servlet>
 
     <servlet>
         <servlet-name>SignUpPage</servlet-name>
-        <jsp-file>/SignUp.jsp</jsp-file>
+        <jsp-file>/jsp/SignUp.jsp</jsp-file>
     </servlet>
 
     <servlet>
         <servlet-name>SignInPage</servlet-name>
-        <jsp-file>/signIn.jsp</jsp-file>
+        <jsp-file>/jsp/signIn.jsp</jsp-file>
     </servlet>
 
     <servlet>
@@ -93,5 +93,10 @@
         <welcome-file>index.jsp</welcome-file>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
+
+    <error-page>
+        <exception-type>java.lang.Throwable</exception-type>
+        <location>/404.html</location>
+    </error-page>
 
 </web-app>

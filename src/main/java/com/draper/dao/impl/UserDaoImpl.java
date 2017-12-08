@@ -67,6 +67,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     public boolean increaseCredit(int credit, User user) {
+        user = (User) find(user.getAccount());
         int lastCredit = user.getCredit() + credit;
         String sql = "UPDATE user SET credit='" + lastCredit + "' WHERE account='" + user.getAccount() + "'";
         executedUpdate(sql);
@@ -74,6 +75,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     public boolean decreaseCredit(int credit, User user) {
+        user = (User) find(user.getAccount());
         int lastCredit = user.getCredit() - credit;
         String sql = "UPDATE user SET credit='" + lastCredit + "' WHERE account='" + user.getAccount() + "'";
         executedUpdate(sql);
