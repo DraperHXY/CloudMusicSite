@@ -7,22 +7,27 @@
 
     <servlet>
         <servlet-name>IndexPage</servlet-name>
-        <jsp-file>/jsp/index.jsp</jsp-file>
+        <servlet-class>com.draper.servlet.IndexPageServlet</servlet-class>
     </servlet>
 
     <servlet>
         <servlet-name>AboutPage</servlet-name>
-        <jsp-file>/jsp/about.jsp</jsp-file>
+        <jsp-file>/WEB-INF/jsp/about.jsp</jsp-file>
+    </servlet>
+
+    <servlet>
+        <servlet-name>TestPage</servlet-name>
+        <jsp-file>/WEB-INF/jsp/test.jsp</jsp-file>
     </servlet>
 
     <servlet>
         <servlet-name>SignUpPage</servlet-name>
-        <jsp-file>/jsp/SignUp.jsp</jsp-file>
+        <jsp-file>/WEB-INF/jsp/SignUp.jsp</jsp-file>
     </servlet>
 
     <servlet>
         <servlet-name>SignInPage</servlet-name>
-        <jsp-file>/jsp/signIn.jsp</jsp-file>
+        <jsp-file>/WEB-INF/jsp/signIn.jsp</jsp-file>
     </servlet>
 
     <servlet>
@@ -45,9 +50,19 @@
         <servlet-class>com.draper.servlet.SignOutServlet</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>ManageServlet</servlet-name>
+        <servlet-class>com.draper.servlet.ManageServlet</servlet-class>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>IndexPage</servlet-name>
         <url-pattern>/index.html</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>TestPage</servlet-name>
+        <url-pattern>/test.html</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
@@ -85,12 +100,16 @@
         <url-pattern>/SignOut.do</url-pattern>
     </servlet-mapping>
 
+    <servlet-mapping>
+        <servlet-name>ManageServlet</servlet-name>
+        <url-pattern>/manager.do</url-pattern>
+    </servlet-mapping>
+
     <session-config>
-        <session-timeout>5</session-timeout>
+        <session-timeout>10</session-timeout>
     </session-config>
 
     <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
 
