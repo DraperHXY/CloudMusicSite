@@ -65,7 +65,8 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="<%
-                    if(user == null) {
+                    if(
+                            user == null) {
                         out.print("signIn.html");
                     } else {
                         out.print("SignOut.do");

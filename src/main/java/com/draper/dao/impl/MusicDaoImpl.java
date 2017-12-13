@@ -146,7 +146,44 @@ public class MusicDaoImpl implements MusicDao {
     }
 
     public String findMusicData(String name) {
-        return null;
+        String path = "../webapps/CloudMusicSite/load_music/";
+        File file = new File(path);
+        if (file.exists()) {
+
+            path = path+name+".mp3";
+            file = new File(path);
+            if(file.exists()){
+                System.out.println(name + ".mp3" + "已存在, 不下载");
+                return path;
+            }
+        } else {
+            System.out.println("目录不存在,创建目录");
+            file.mkdirs();
+            path = path + name + ".mp3";
+        }
+        System.out.println("文件不存在,开始传输到指定目录");
+        try {
+            Connection con = DbUtil.getConnection();
+            String sql = "SELECT datas FROM music WHERE name = ?";
+            PreparedStatement pps = null;
+            pps = con.prepareStatement(sql);
+            pps.setString(1, name);
+            ResultSet rs = pps.executeQuery();
+            if (rs.next()) {
+                Blob blob = rs.getBlob(1);
+                InputStream in = blob.getBinaryStream();
+                OutputStream out = new FileOutputStream(path);
+                IOUtils.copy(in, out);
+            }
+            System.out.println("传输完毕");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return path;
     }
 
     public int getMusicNum() {

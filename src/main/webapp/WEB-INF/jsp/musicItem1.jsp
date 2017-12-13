@@ -31,17 +31,17 @@
             <div class="col-xs-6 col-md-9">
                 <p class="h1"><%
                     List<Music> musicInfoList = (List<Music>) request.getAttribute("musicInfoList");
-                    if(musicInfoList != null || !musicInfoList.isEmpty()){
+                    if (musicInfoList != null || !musicInfoList.isEmpty()) {
                         Music music = musicInfoList.get(0);
                         out.print(music.getSongName());
                 %></p>
                 <p class="h4"><%
-                        music = musicInfoList.get(0);
-                        out.print(music.getSinger());
+                    music = musicInfoList.get(0);
+                    out.print(music.getSinger());
                 %></p>
                 <a href="<%
                         music = musicInfoList.get(0);
-                        out.print(music.getSongName());
+                        out.print("downloadMusic.html?musicName=" + music.getSongName());
                         musicInfoList.remove(0);
                     }
                 %>">Download</a>

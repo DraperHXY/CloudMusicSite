@@ -41,4 +41,10 @@ public class MusicServerManager {
         List<Music> musicNameList = musicDao.findMusicInfoList();
         return musicNameList;
     }
+
+    public static String getMusicPath(String name){
+        MusicDao musicDao = new MusicDaoImpl();
+        String path = musicDao.findMusicData(name);
+        return path;
+    }
 }

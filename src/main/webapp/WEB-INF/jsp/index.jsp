@@ -1,7 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8" %>
 <%@ page import="com.draper.controller.MusicServerManager" %>
-<%@ page import="com.draper.dao.impl.MusicDaoImpl" %>
-<%@ page import="com.draper.dao.MusicDao" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,17 +9,6 @@
 <body>
 
 <%@ include file="header.jsp" %>
-
-<div class="container">
-    <div class="jumbotron text-center">
-        <p class="h1">Download</p>
-        <div class="row">
-            <div class="col-md-6 col-md-offset-3 text-center">
-                <p>You can download a music <a href="DreamingAlone.mp3">Dreaming Alone</a></p>
-            </div>
-        </div>
-    </div>
-</div>
 
 <%
     int n = MusicServerManager.getMusicNum();
@@ -38,8 +25,6 @@
         }
     }
 %>
-
-
 
 <%@include file="footer.jsp" %>
 
