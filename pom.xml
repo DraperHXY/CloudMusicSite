@@ -8,6 +8,7 @@
     <name>CloudMusicSite Maven Webapp</name>
     <url>http://maven.apache.org</url>
     <dependencies>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -70,6 +71,7 @@
 
 
     </dependencies>
+
     <build>
         <finalName>CloudMusicSite</finalName>
     </build>

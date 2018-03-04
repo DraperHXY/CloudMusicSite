@@ -2,6 +2,7 @@ package com.draper.servlet;
 
 import com.draper.controller.MusicServerManager;
 import com.draper.domain.User;
+import com.draper.util.Log;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -21,27 +22,25 @@ public class DownloadMusicServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("geiRequestUrl:" + req.getRequestURL());
         String musicName = req.getParameter("musicName");
-        System.out.println("要下载的音乐是:" + musicName);
-        System.out.println("下载页面处理");
+        Log.d("geiRequestUrl",req.getRequestURL());
+        Log.d("doGet_download_music_name", musicName);
+        Log.d("pre_downloading");
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute("user");
         if (user == null) {
-            System.out.println("跳转至登录页面");
             resp.sendRedirect("signIn.html");
         } else {
-            int credit = (int) session.getAttribute("credit");
+            Integer credit = (Integer)session.getAttribute("credit");
             if (credit > 5) {
-                System.out.println("准备下载");
+                Log.d("downloading");
                 MusicServerManager.getMusicPath(musicName);
                 String path = "load_music/" + musicName + ".mp3";
-                System.out.println("path: " + path);
-
+                Log.d("downloading_path",path);
 
                 //download
                 resp.setContentType("application/audio");
-                resp.setHeader("Content-Disposition", "attachment; filename="+musicName+".mp3");
+                resp.setHeader("Content-Disposition", "attachment; filename=" + musicName + ".mp3");
 
                 //获取上下文
                 ServletContext context = getServletContext();
@@ -55,10 +54,10 @@ public class DownloadMusicServlet extends HttpServlet {
                 }
                 outputStream.flush();
                 outputStream.close();
-                System.out.println("下载完成");
+                Log.d("download_finish");
             } else {
                 //积分不够
-                System.out.println("积分不够");
+                Log.d("download_error","User don't have enough credit");
             }
         }
     }

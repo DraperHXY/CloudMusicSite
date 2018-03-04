@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.draper.util.Log;
 import com.draper.util.Mp3Util;
 import org.apache.commons.io.IOUtils;
 
@@ -26,10 +27,9 @@ public class MusicDaoImpl implements MusicDao {
         String name = music.getSongName();
         String singer = music.getSinger();
         Integer duration = music.getDuration();
-
-        System.out.println(name);
-        System.out.println(singer);
-        System.out.println(duration);
+        Log.d("add_music_name",name);
+        Log.d("add_music_singer", singer);
+        Log.d("add_music_duration", duration);
 
         try {
             Connection con = DbUtil.getConnection();
@@ -70,6 +70,7 @@ public class MusicDaoImpl implements MusicDao {
             PreparedStatement pps = null;
             pps = con.prepareStatement(sql);
             pps.setString(1, name);
+            Log.d("find_music_name",name);
             ResultSet rs = pps.executeQuery();
             if (rs.next()) {
                 Blob blob = rs.getBlob(2);
@@ -91,7 +92,7 @@ public class MusicDaoImpl implements MusicDao {
         String path = "../webapps/img/" + name + ".jpg";
         File file = new File(path);
         if (file.exists()) {
-            System.out.println(name + ".jpg" + "已存在, 不下载");
+            Log.d("find_image_is_exist",name + ".jpg" + "existed,don't download again");
             return path;
         }
 
@@ -132,6 +133,9 @@ public class MusicDaoImpl implements MusicDao {
                 String name = rs.getString(1);
                 String singer = rs.getString(2);
                 int duration = rs.getInt(3);
+                Log.d("findMusicInfo_music_name",name);
+                Log.d("findMusicInfo_music_singer", singer);
+                Log.d("findMusicInfo_music_duration", duration);
                 Music music = new Music();
                 music.setSongName(name);
                 music.setSinger(singer);
@@ -153,15 +157,15 @@ public class MusicDaoImpl implements MusicDao {
             path = path+name+".mp3";
             file = new File(path);
             if(file.exists()){
-                System.out.println(name + ".mp3" + "已存在, 不下载");
+                Log.d(name + ".mp3" + "existed, don't download");
                 return path;
             }
         } else {
-            System.out.println("目录不存在,创建目录");
+            Log.d("dir not exist, create dir");
             file.mkdirs();
             path = path + name + ".mp3";
         }
-        System.out.println("文件不存在,开始传输到指定目录");
+        Log.d("file not exist, began transfer to correct dir");
         try {
             Connection con = DbUtil.getConnection();
             String sql = "SELECT datas FROM music WHERE name = ?";
@@ -175,7 +179,7 @@ public class MusicDaoImpl implements MusicDao {
                 OutputStream out = new FileOutputStream(path);
                 IOUtils.copy(in, out);
             }
-            System.out.println("传输完毕");
+            Log.d("transmission complete");
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (FileNotFoundException e) {
@@ -224,7 +228,6 @@ public class MusicDaoImpl implements MusicDao {
 
 
     public void add(Object obj) {
-
     }
 
     public Object find(Object key) {

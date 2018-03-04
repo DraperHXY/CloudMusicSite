@@ -36,8 +36,8 @@ public class Mp3Util {
             AbstractID3v2Tag v2tag = file.getID3v2Tag();
             String singer = v2tag.getFirst(ID3v24Frames.FRAME_ID_ARTIST);
             String name = v2tag.getFirst(ID3v24Frames.FRAME_ID_TITLE);
-            music.setSongName(singer);
-            music.setSinger(name);
+            music.setSongName(name);
+            music.setSinger(singer);
             MP3AudioHeader audioHeader = (MP3AudioHeader) file.getAudioHeader();
             music.setDuration(audioHeader.getTrackLength());
         } catch (IOException e) {

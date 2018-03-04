@@ -20,10 +20,10 @@ public class DbUtil {
     }
 
     public static Connection getConnection() {
-        if (connection != null) {
-            return connection;
-        }
         try {
+            if (connection != null && !connection.isClosed()) {
+                return connection;
+            }
             Properties properties = new Properties();
             InputStream inputStream = DbUtil.class.getClassLoader().getResourceAsStream("db.properties");
             properties.load(inputStream);

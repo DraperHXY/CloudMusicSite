@@ -3,6 +3,7 @@ package com.draper.servlet;
 import com.draper.controller.MusicServerManager;
 import com.draper.dao.MusicDao;
 import com.draper.dao.impl.MusicDaoImpl;
+import com.draper.util.Log;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadBase;
 import org.apache.commons.fileupload.FileUploadException;
@@ -36,8 +37,6 @@ public class ManageServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws
             ServletException, IOException {
 
-        System.out.println("到了1");
-
         //得到上传文件的保存目录，将上传的文件存放于WEB-INF目录下，不允许外界直接访问，保证上传文件的安全
         String savePath = this.getServletContext().getRealPath("WEB-INF/upload");
         File saveFile = new File(savePath);
@@ -51,14 +50,10 @@ public class ManageServlet extends HttpServlet {
             //创建临时目录
             tmpFile.mkdir();
         }
-        System.out.println("到了2");
-
 
         //消息提示
         String message = "";
         try {
-            System.out.println("到了2.1");
-
             //使用Apache文件上传组件处理文件上传步骤：
             //1、创建一个DiskFileItemFactory工厂
             DiskFileItemFactory factory = new DiskFileItemFactory();
@@ -71,24 +66,23 @@ public class ManageServlet extends HttpServlet {
             //2、创建一个文件上传解析器
             ServletFileUpload upload = new ServletFileUpload(factory);
             //监听文件上传进度
-//            upload.setProgressListener(new ProgressListener() {
-//
-//                public void update(long pBytesRead, long pContentLength, int arg2) {
-//                    /**
-//                     * 文件大小为：14608,当前已处理：4096
-//                     文件大小为：14608,当前已处理：7367
-//                     文件大小为：14608,当前已处理：11419
-//                     文件大小为：14608,当前已处理：14608
-//                     */
-//                }
-//            });
+            upload.setProgressListener(new ProgressListener() {
+
+                public void update(long pBytesRead, long pContentLength, int arg2) {
+                    /**
+                     * 文件大小为：14608,当前已处理：4096
+                     文件大小为：14608,当前已处理：7367
+                     文件大小为：14608,当前已处理：11419
+                     文件大小为：14608,当前已处理：14608
+                     */
+                }
+            });
             //解决上传文件名的中文乱码
             upload.setHeaderEncoding("UTF-8");
-            System.out.println("到了3");
             //3、判断提交上来的数据是否是上传表单的数据
             if (!ServletFileUpload.isMultipartContent(req)) {
                 //按照传统方式获取数据
-                System.out.println("gg");
+                Log.e("download failed");
                 return;
             }
 
@@ -98,7 +92,7 @@ public class ManageServlet extends HttpServlet {
             upload.setSizeMax(1024 * 1024 * 16);
             //4、使用ServletFileUpload解析器解析上传数据，解析结果返回的是一个List<FileItem>集合，每一个FileItem对应一个Form表单的输入项
             List<FileItem> list = upload.parseRequest(req);
-            System.out.println("size=" + list.size());
+            Log.d("upload_size", list.size());
             for (FileItem item : list) {
                 //如果fileitem中封装的是普通输入项的数据
                 if (item.isFormField()) {
@@ -106,11 +100,11 @@ public class ManageServlet extends HttpServlet {
                     //解决普通输入项的数据的中文乱码问题
                     String value = item.getString("UTF-8");
                     //value = new String(value.getBytes("iso8859-1"),"UTF-8");
-                    System.out.println(name + "=" + value);
+                    Log.d("upload_file_name", value);
                 } else {//如果fileitem中封装的是上传文件
                     //得到上传的文件名称，
                     String filename = item.getName();
-                    System.out.println(filename);
+                    Log.d("upload_file_name", filename);
                     if (filename == null || filename.trim().equals("")) {
                         continue;
                     }
@@ -120,7 +114,7 @@ public class ManageServlet extends HttpServlet {
                     //得到上传文件的扩展名
                     String fileExtName = filename.substring(filename.lastIndexOf(".") + 1);
                     //如果需要限制上传的文件类型，那么可以通过文件的扩展名来判断上传的文件类型是否合法
-                    System.out.println("上传的文件的扩展名是：" + fileExtName);
+                    Log.d("upload_file_extensive_name",fileExtName);
                     //获取item中的上传文件的输入流
                     InputStream in = item.getInputStream();
                     //得到文件保存的名称
@@ -128,7 +122,7 @@ public class ManageServlet extends HttpServlet {
 //                    //得到文件的保存目录
                     String realSavePath = makePath(saveFilename, savePath);
                     String path = "../webapps/load_music/" + filename;
-                    System.out.println(path);
+                    Log.d("upload_read_save_path",path);
                     //创建一个文件输出流
                     FileOutputStream out = new FileOutputStream(path);
                     //创建一个缓冲区
