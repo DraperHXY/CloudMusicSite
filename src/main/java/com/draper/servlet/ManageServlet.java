@@ -1,12 +1,9 @@
 package com.draper.servlet;
 
-import com.draper.controller.MusicServerManager;
 import com.draper.dao.MusicDao;
 import com.draper.dao.impl.MusicDaoImpl;
-import com.draper.util.Log;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadBase;
-import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.ProgressListener;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -82,7 +79,6 @@ public class ManageServlet extends HttpServlet {
             //3、判断提交上来的数据是否是上传表单的数据
             if (!ServletFileUpload.isMultipartContent(req)) {
                 //按照传统方式获取数据
-                Log.e("download failed");
                 return;
             }
 
@@ -92,7 +88,6 @@ public class ManageServlet extends HttpServlet {
             upload.setSizeMax(1024 * 1024 * 16);
             //4、使用ServletFileUpload解析器解析上传数据，解析结果返回的是一个List<FileItem>集合，每一个FileItem对应一个Form表单的输入项
             List<FileItem> list = upload.parseRequest(req);
-            Log.d("upload_size", list.size());
             for (FileItem item : list) {
                 //如果fileitem中封装的是普通输入项的数据
                 if (item.isFormField()) {
@@ -100,11 +95,9 @@ public class ManageServlet extends HttpServlet {
                     //解决普通输入项的数据的中文乱码问题
                     String value = item.getString("UTF-8");
                     //value = new String(value.getBytes("iso8859-1"),"UTF-8");
-                    Log.d("upload_file_name", value);
                 } else {//如果fileitem中封装的是上传文件
                     //得到上传的文件名称，
                     String filename = item.getName();
-                    Log.d("upload_file_name", filename);
                     if (filename == null || filename.trim().equals("")) {
                         continue;
                     }
@@ -114,7 +107,6 @@ public class ManageServlet extends HttpServlet {
                     //得到上传文件的扩展名
                     String fileExtName = filename.substring(filename.lastIndexOf(".") + 1);
                     //如果需要限制上传的文件类型，那么可以通过文件的扩展名来判断上传的文件类型是否合法
-                    Log.d("upload_file_extensive_name",fileExtName);
                     //获取item中的上传文件的输入流
                     InputStream in = item.getInputStream();
                     //得到文件保存的名称
@@ -122,7 +114,6 @@ public class ManageServlet extends HttpServlet {
 //                    //得到文件的保存目录
                     String realSavePath = makePath(saveFilename, savePath);
                     String path = "../webapps/load_music/" + filename;
-                    Log.d("upload_read_save_path",path);
                     //创建一个文件输出流
                     FileOutputStream out = new FileOutputStream(path);
                     //创建一个缓冲区

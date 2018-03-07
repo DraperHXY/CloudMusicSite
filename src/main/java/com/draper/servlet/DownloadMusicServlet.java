@@ -2,7 +2,6 @@ package com.draper.servlet;
 
 import com.draper.controller.MusicServerManager;
 import com.draper.domain.User;
-import com.draper.util.Log;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -23,9 +22,6 @@ public class DownloadMusicServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String musicName = req.getParameter("musicName");
-        Log.d("geiRequestUrl",req.getRequestURL());
-        Log.d("doGet_download_music_name", musicName);
-        Log.d("pre_downloading");
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute("user");
         if (user == null) {
@@ -33,10 +29,8 @@ public class DownloadMusicServlet extends HttpServlet {
         } else {
             Integer credit = (Integer)session.getAttribute("credit");
             if (credit > 5) {
-                Log.d("downloading");
                 MusicServerManager.getMusicPath(musicName);
                 String path = "load_music/" + musicName + ".mp3";
-                Log.d("downloading_path",path);
 
                 //download
                 resp.setContentType("application/audio");
@@ -54,10 +48,8 @@ public class DownloadMusicServlet extends HttpServlet {
                 }
                 outputStream.flush();
                 outputStream.close();
-                Log.d("download_finish");
             } else {
                 //积分不够
-                Log.d("download_error","User don't have enough credit");
             }
         }
     }

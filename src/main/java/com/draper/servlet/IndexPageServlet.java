@@ -2,6 +2,7 @@ package com.draper.servlet;
 
 import com.draper.controller.MusicServerManager;
 import com.draper.domain.Music;
+import org.apache.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,12 +17,14 @@ import java.util.List;
  * Email: Draper_HXY@163.com
  */
 public class IndexPageServlet extends HttpServlet {
+    public static Logger logger = Logger.getLogger(IndexPageServlet.class);
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //bug 一级: 每次访问 index 都会进行下载, 严重影响性能
         List<String> musicNameList = MusicServerManager.preDownloadImage();
         List<Music> musicInfoList = MusicServerManager.preDownloadInfo();
+        logger.error("pre download");
         req.setAttribute("musicNameList", musicNameList);
         req.setAttribute("musicInfoList", musicInfoList);
         RequestDispatcher view = req.getRequestDispatcher("/WEB-INF/jsp/index.jsp");

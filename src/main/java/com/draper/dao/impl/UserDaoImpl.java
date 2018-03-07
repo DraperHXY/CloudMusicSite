@@ -12,7 +12,6 @@ import java.sql.*;
  * Email: Draper_HXY@163.com
  */
 public class UserDaoImpl implements UserDao {
-    private static final String TAG = "UserDaoImpl";
     private Connection connection = null;
 
     public UserDaoImpl() {

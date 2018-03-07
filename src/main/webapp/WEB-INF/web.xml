@@ -5,6 +5,10 @@
 <web-app>
     <display-name>Archetype Created Web Application</display-name>
 
+    <listener>
+        <listener-class>com.draper.servlet.listener.InitiateWebSettingListener</listener-class>
+    </listener>
+
     <servlet>
         <servlet-name>IndexPage</servlet-name>
         <servlet-class>com.draper.servlet.IndexPageServlet</servlet-class>
