@@ -18,7 +18,7 @@ import org.apache.log4j.Logger;
  * Created by Draper_HXY 2017/12/9 下午2:15
  * Email: Draper_HXY@163.com
  */
-public class MusicDaoImpl implements MusicDao {
+public class MusicDaoImpl implements MusicDao{
 
     private static Logger logger = Logger.getLogger(MusicDaoImpl.class);
 
@@ -47,9 +47,9 @@ public class MusicDaoImpl implements MusicDao {
             byte[] imageBytes = Mp3Util.getMP3Image(file);
             Blob imageData = new SerialBlob(imageBytes);
             pps.setBlob(5, imageData);
-
-
             pps.executeUpdate();
+
+
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (FileNotFoundException e) {
@@ -219,11 +219,4 @@ public class MusicDaoImpl implements MusicDao {
         return null;
     }
 
-
-    public void add(Object obj) {
-    }
-
-    public Object find(Object key) {
-        return null;
-    }
 }

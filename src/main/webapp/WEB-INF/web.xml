@@ -15,6 +15,16 @@
     </servlet>
 
     <servlet>
+        <servlet-name>ActivitiesPage</servlet-name>
+        <servlet-class>com.draper.servlet.ActivitiesPageServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>ActivityPage</servlet-name>
+        <servlet-class>com.draper.servlet.LoadActivityServlet</servlet-class>
+    </servlet>
+
+    <servlet>
         <servlet-name>AboutPage</servlet-name>
         <jsp-file>/WEB-INF/jsp/about.jsp</jsp-file>
     </servlet>
@@ -55,6 +65,11 @@
     </servlet>
 
     <servlet>
+        <servlet-name>CommitCommentsServlet</servlet-name>
+        <servlet-class>com.draper.servlet.CommitCommentsServlet</servlet-class>
+    </servlet>
+
+    <servlet>
         <servlet-name>ManageServlet</servlet-name>
         <servlet-class>com.draper.servlet.ManageServlet</servlet-class>
     </servlet>
@@ -62,6 +77,16 @@
     <servlet-mapping>
         <servlet-name>IndexPage</servlet-name>
         <url-pattern>/index.html</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ActivitiesPage</servlet-name>
+        <url-pattern>/activities.html</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ActivityPage</servlet-name>
+        <url-pattern>/activity.html</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
@@ -102,6 +127,11 @@
     <servlet-mapping>
         <servlet-name>SignOutServlet</servlet-name>
         <url-pattern>/SignOut.do</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>CommitCommentsServlet</servlet-name>
+        <url-pattern>/CommitComment.do</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>

@@ -1,5 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8" %>
-<%@ page import="com.draper.controller.MusicServerManager" %>
+<%@ page import="com.draper.controller.MusicServiceManager" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +11,7 @@
 <%@ include file="header.jsp" %>
 
 <%
-    int n = MusicServerManager.getMusicNum();
+    int n = MusicServiceManager.getMusicNum();
     for (int i = 0; i < n; i++) {
 
         if (i % 2 == 0) {

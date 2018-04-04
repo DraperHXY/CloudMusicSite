@@ -1,4 +1,4 @@
-<%@ page import="com.draper.controller.MusicServerManager" %>
+<%@ page import="com.draper.controller.MusicServiceManager" %>
 <%@ page import="java.io.InputStream" %>
 <%@ page import="java.io.OutputStream" %><%--
   Created by IntelliJ IDEA.

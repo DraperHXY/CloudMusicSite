@@ -1,6 +1,6 @@
 package com.draper.servlet;
 
-import com.draper.controller.MusicServerManager;
+import com.draper.controller.MusicServiceManager;
 import com.draper.domain.Music;
 import org.apache.log4j.Logger;
 
@@ -22,9 +22,8 @@ public class IndexPageServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //bug 一级: 每次访问 index 都会进行下载, 严重影响性能
-        List<String> musicNameList = MusicServerManager.preDownloadImage();
-        List<Music> musicInfoList = MusicServerManager.preDownloadInfo();
-        logger.error("pre download");
+        List<String> musicNameList = MusicServiceManager.preDownloadImage();
+        List<Music> musicInfoList = MusicServiceManager.preDownloadInfo();
         req.setAttribute("musicNameList", musicNameList);
         req.setAttribute("musicInfoList", musicInfoList);
         RequestDispatcher view = req.getRequestDispatcher("/WEB-INF/jsp/index.jsp");

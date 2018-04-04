@@ -7,22 +7,10 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-
     session = request.getSession();
     String name = (String) session.getAttribute("name");
-    String emailAddress = (String) session.getAttribute("emailAddress");
-    String password = (String) session.getAttribute("password");
     String credit = String.valueOf(session.getAttribute("credit"));
-    String lastLoginTime = String.valueOf(session.getAttribute("lastLoginTime"));
     User user = (User) session.getAttribute("user");
-    if (user != null){
-        System.out.println(name);
-        System.out.println(emailAddress);
-        System.out.println(password);
-        System.out.println(credit);
-        System.out.println(lastLoginTime);
-        System.out.println(user);
-    }
 %>
 
 
@@ -57,7 +45,7 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="#">News</a></li>
+                <li><a href="activities.html">Activity</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="test.html">Test</a></li>
             </ul>

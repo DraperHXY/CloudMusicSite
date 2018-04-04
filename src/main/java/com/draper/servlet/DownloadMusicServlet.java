@@ -1,6 +1,6 @@
 package com.draper.servlet;
 
-import com.draper.controller.MusicServerManager;
+import com.draper.controller.MusicServiceManager;
 import com.draper.domain.User;
 
 import javax.servlet.ServletContext;
@@ -29,7 +29,7 @@ public class DownloadMusicServlet extends HttpServlet {
         } else {
             Integer credit = (Integer)session.getAttribute("credit");
             if (credit > 5) {
-                MusicServerManager.getMusicPath(musicName);
+                MusicServiceManager.getMusicPath(musicName);
                 String path = "load_music/" + musicName + ".mp3";
 
                 //download

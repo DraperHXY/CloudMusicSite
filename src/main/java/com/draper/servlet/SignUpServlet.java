@@ -2,6 +2,7 @@ package com.draper.servlet;
 
 import com.draper.controller.UserServiceManager;
 import com.draper.domain.User;
+import com.draper.util.LogUtil;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -34,7 +35,7 @@ public class SignUpServlet extends HttpServlet {
             RequestDispatcher view = req.getRequestDispatcher("SignIn.do");
             view.forward(req, resp);
         } else {
-            System.out.println("注册失败");
+            LogUtil.logger.debug("注册失败");
         }
     }
 }

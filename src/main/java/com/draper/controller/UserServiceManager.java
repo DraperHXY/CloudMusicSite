@@ -5,6 +5,8 @@ import com.draper.dao.UserDao;
 import com.draper.dao.impl.UserDaoImpl;
 import com.draper.domain.User;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -13,6 +15,15 @@ import java.util.Date;
  * Email: Draper_HXY@163.com
  */
 public class UserServiceManager {
+
+    public static boolean isSignIn(HttpServletRequest req){
+        HttpSession session = req.getSession();
+        User user = (User) session.getAttribute("user");
+        if (user == null){
+            return false;
+        }
+        return true;
+    }
 
     public static boolean signUp(User user) {
         Dao userDao = new UserDaoImpl();

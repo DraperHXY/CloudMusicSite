@@ -9,7 +9,7 @@ import java.util.List;
  * Created by Draper_HXY 2017/12/9 下午2:15
  * Email: Draper_HXY@163.com
  */
-public interface MusicDao extends Dao {
+public interface MusicDao {
 
     void add(File file);
 

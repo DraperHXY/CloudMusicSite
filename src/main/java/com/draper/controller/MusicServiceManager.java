@@ -10,12 +10,7 @@ import java.util.List;
  * Created by Draper_HXY 2017/12/9 下午7:03
  * Email: Draper_HXY@163.com
  */
-public class MusicServerManager {
-
-    public static List<Music> get() {
-
-        return null;
-    }
+public class MusicServiceManager {
 
     /**
      * 获取数据库歌曲的数量

@@ -3,6 +3,7 @@ package com.draper.servlet;
 import com.draper.controller.UserServiceManager;
 import com.draper.controller.UserTrackManager;
 import com.draper.domain.User;
+import com.draper.util.LogUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -32,7 +33,6 @@ public class SignInServlet extends HttpServlet {
 
         if (user != null) {
             HttpSession session = req.getSession();
-            System.out.println(session.getCreationTime());
             UserTrackManager.signIn(session, user);
             resp.sendRedirect("index.html");
         } else {
